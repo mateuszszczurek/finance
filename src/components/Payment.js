@@ -1,9 +1,10 @@
 import React from 'react';
+import {ListGroup, ListGroupItem} from "react-bootstrap";
 
 const Payments = ({items}) =>
-        <ul>
+        <ListGroup>
         {items.map((item, index) => (
-            <li key={index}>{item.user} {item.name} {item.amount} {item.date}</li>))}
-        </ul>;
+            <ListGroupItem key={index}>{item.user} {item.name} {item.amount} {item.date}</ListGroupItem>))}
+        </ListGroup>;
 
 export default Payments;

@@ -6,6 +6,10 @@ import Payments from './components/Payment'
 import Pages from './components/Pages'
 import NewPaymentForm from "./components/NewPaymentForm";
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import {Col, Grid, Row} from "react-bootstrap";
+
 class App extends Component {
 
     constructor(props) {
@@ -37,7 +41,6 @@ class App extends Component {
     componentDidMount() {
         this.props.dataProvider()
             .then(data => {
-                console.log(data.payments);
                 const userName = data.name + " " + data.lastName;
                 return data.payments.map(item => ({...item, user: userName}));
             })
@@ -48,24 +51,23 @@ class App extends Component {
 
         const {pageSize, currentlySelected, data} = {...this.state};
 
-        console.log(data);
-
         const pages = Math.ceil(this.state.data.length / this.state.pageSize);
         const pagedData = data.slice(pageSize * (currentlySelected - 1), (currentlySelected * pageSize));
 
         return <div>
-            <div>
-                <Payments items={pagedData}/>
-            </div>
+            <Grid>
+                <Row style={{height:"600px"}}>
+                    <Col xs={12}>
+                        <Payments items={pagedData}/>
+                    </Col>
+                </Row>
+            </Grid>
             <Pages selectionChange={this.selection} pages={pages} currentlySelected={currentlySelected}/>
-            <div>
-                Total size {data.length}
-            </div>
-            <div>
-                <NewPaymentForm addPayment={this.addPayment}/>
-            </div>
-        </div>;
+            Total size {data.length}
+            <NewPaymentForm addPayment={this.addPayment}/>
+        </div>
     }
+
 
 }
 

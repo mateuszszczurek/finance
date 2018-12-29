@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Button, Col, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
 
 class NewPaymentForm extends Component {
 
@@ -19,7 +20,7 @@ class NewPaymentForm extends Component {
     }
 
     inputChange(event) {
-        const name = event.target.name;
+        const name = event.target.id;
 
         this.setState({
             [name]: event.target.value
@@ -27,14 +28,47 @@ class NewPaymentForm extends Component {
     }
 
     render() {
-        return <form onSubmit={this.handleSubmit} onChange={this.inputChange}>
-            Payment name:<br/>
-            <input type='text' name='paymentName' onChange={this.inputChange} value={this.state.paymentName}/><br/>
-            Amount:<br/>
-            <input type='text' name='amount' onChange={this.inputChange} value={this.state.amount}/><br/>
-            Date:<br/>
-            <input type='text' name='date' onChange={this.inputChange} value={this.state.date}/><br/>
-            <input type='submit' value="Submit"/>
+
+        return <form onSubmit={this.handleSubmit}>
+
+            <FormGroup controlId="paymentName" style={{pb:20}}>
+                <Col componentClass={ControlLabel} sm={2}>
+                    Payment Name
+                </Col>
+                <Col sm={10}>
+                    <FormControl type="text" value={this.state.paymentName} placeholder="Enter text"
+                                 onChange={this.inputChange}/>
+                </Col>
+            </FormGroup>
+
+            <FormGroup controlId="amount" style={{paddingTop:"30px"}}>
+
+                <Col componentClass={ControlLabel} sm={2}>
+                    Amount
+                </Col>
+                <Col sm={10}>
+                    <FormControl type="text" value={this.state.amount} placeholder="Enter text"
+                                 onChange={this.inputChange}/>
+                </Col>
+
+            </FormGroup>
+
+            <FormGroup controlId="date">
+                <Col componentClass={ControlLabel} sm={2}>
+                    Date
+                </Col>
+                <Col sm={10}>
+                    <FormControl type="text" value={this.state.date} placeholder="Enter text"
+                                 onChange={this.inputChange}/>
+                </Col>
+            </FormGroup>
+
+            <FormGroup>
+                <Col smOffset={2} sm={10}>
+                    <Button type="submit">Add</Button>
+                </Col>
+            </FormGroup>
+
         </form>
     }
 
